@@ -1,0 +1,7 @@
+<mvc:View controllerName="com.sapui5.zpurchasemd09.controller.Main"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m">
+    <Page id="page" title="Detaildetail">
+        <content />
+    </Page>
+</mvc:View>

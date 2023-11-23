@@ -1,0 +1,6 @@
+<mvc:View controllerName="com.sapui5.zpurchasemd09.controller.Main" height="100%"
+    xmlns:mvc="sap.ui.core.mvc" xmlns:f="sap.f" displayBlock="true"
+    xmlns="sap.m">
+    <f:DynamicPage id="page">     
+    </f:DynamicPage>
+</mvc:View>
