@@ -23,6 +23,7 @@
     }
   },
   "sap.ui": {
+    "fullWidth": true,
     "technology": "UI5",
     "icons": {
       "icon": "",
@@ -41,7 +42,7 @@
   "sap.ui5": {
     "flexEnabled": true,
     "dependencies": {
-      "minUI5Version": "1.120.1",
+      "minUI5Version": "1.71.60",
       "libs": {
         "sap.m": {},
         "sap.ui.core": {},
@@ -90,13 +91,12 @@
           "name": "RouteMain",
           "pattern": ":layout:",
           "target": [
-            "TargetMain",
-            "TargetDetail"
+            "TargetMain"
           ]
         },
         {
           "name": "RouteDetail",
-          "pattern": "/detail/{layout}",
+          "pattern": "detail/{product}/{layout}",
           "target": [
             "TargetMain",
             "TargetDetail"
@@ -106,12 +106,10 @@
       "targets": {
         "TargetMain": {
           "controlAggregation": "beginColumnPages",
-          "viewId": "Main",
           "viewName": "Main"
         },
         "TargetDetail": {
           "controlAggregation": "midColumnPages",
-          "viewId": "Detail",
           "viewName": "Detail"
         },
         "TargetDetaildetail": {

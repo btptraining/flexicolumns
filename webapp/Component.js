@@ -1,41 +1,69 @@
-/**
- * eslint-disable @sap/ui5-jsdocs/no-jsdoc
- */
+sap.ui.define(
+  [
+    "jquery.sap.global",
+    "sap/ui/core/UIComponent",
+    "sap/ui/model/json/JSONModel",
+    "sap/f/FlexibleColumnLayoutSemanticHelper",
+  ],
+  function (
+    jQuery,
+    UIComponent,
+    JSONModel,
+    FlexibleColumnLayoutSemanticHelper
+  ) {
+    "use strict";
 
-sap.ui.define([
-        "sap/ui/core/UIComponent",
-        "sap/ui/Device",
-        "com/sapui5/zpurchasemd09/model/models"
-    ],
-    function (UIComponent, Device, models) {
-        "use strict";
+    var Component = UIComponent.extend("com.sapui5.zpurchasemd09.Component", {
+      metadata: {
+        manifest: "json",
+      },
 
-        return UIComponent.extend("com.sapui5.zpurchasemd09.Component", {
-            metadata: {
-                manifest: "json"
-            },
+      init: function () {
+        UIComponent.prototype.init.apply(this, arguments);
 
-            /**
-             * The component is initialized by UI5 automatically during the startup of the app and calls the init method once.
-             * @public
-             * @override
-             */
-            init: function () {
-                // call the base component's init function
-                UIComponent.prototype.init.apply(this, arguments);
+        var oModel = new JSONModel();
+        this.setModel(oModel);
 
-                // enable routing
-                this.getRouter().initialize();
+        // set products demo model on this sample
+        var oProductsModel = new JSONModel(
+          sap.ui.require.toUrl("com/sapui5/zpurchasemd09/mockdata") +
+            "/products.json"
+        );
+        oProductsModel.setSizeLimit(1000);
+        this.setModel(oProductsModel, "products");
 
-                // set the device model
-                this.setModel(models.createDeviceModel(), "device");
-            },
-            createContent:function(){
-                return new sap.ui.view({
-                    viewName:"com.sapui5.zpurchasemd09.view.FlexibleColumnLayout",
-                    type:"XML"
-                })
-            }
+        this.getRouter().initialize();
+      },
+
+      createContent: function () {
+        return sap.ui.view({
+          viewName: "com.sapui5.zpurchasemd09.view.FlexibleColumnLayout",
+          type: "XML",
         });
-    },true
+      },
+
+      /**
+       * Returns an instance of the semantic helper
+       * @returns {sap.f.FlexibleColumnLayoutSemanticHelper} An instance of the semantic helper
+       */
+      getHelper: function () {
+        var oFCL = this.getRootControl().byId("fcl"),
+          oParams = jQuery.sap.getUriParameters(),
+          oSettings = {
+            defaultTwoColumnLayoutType: sap.f.LayoutType.TwoColumnsMidExpanded,
+            defaultThreeColumnLayoutType:
+              sap.f.LayoutType.ThreeColumnsMidExpanded,
+            mode: oParams.get("mode"),
+            maxColumnsCount: oParams.get("max"),
+          };
+
+        return FlexibleColumnLayoutSemanticHelper.getInstanceFor(
+          oFCL,
+          oSettings
+        );
+      },
+    });
+    return Component;
+  },
+  true
 );

@@ -1,15 +1,12 @@
-sap.ui.define([
-    "sap/ui/core/mvc/Controller"
-],
-    /**
-     * @param {typeof sap.ui.core.mvc.Controller} Controller
-     */
-    function (Controller) {
-        "use strict";
+sap.ui.define(
+  ["sap/ui/model/json/JSONModel", "sap/ui/core/mvc/Controller"],
+  function (JSONModel, Controller) {
+    "use strict";
 
-        return Controller.extend("com.sapui5.zpurchasemd09.controller.Detaildetail", {
-            onInit: function () {
-
-            }
-        });
-    });
+    return Controller.extend(
+      "com.sapui5.zpurchasemd09.controller.DetailDetail",
+      {}
+    );
+  },
+  true
+);
